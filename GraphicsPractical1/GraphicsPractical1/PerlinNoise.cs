@@ -5,6 +5,7 @@ using System.Text;
 
 namespace GraphicsPractical1
 {
+    // http://devmag.org.za/2009/04/25/perlin-noise/
     class PerlinNoise
     {
         static float[][] GenerateWhiteNoise(int width, int height)

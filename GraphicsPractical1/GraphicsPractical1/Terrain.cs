@@ -127,8 +127,6 @@ namespace GraphicsPractical1
             int maxHeight = 255;
             int terrainTypes = 5;
             int height = this.ConvertToHeightRange((int)oldHeight, heightScale);
-            //Console.WriteLine(height);
-            //Console.WriteLine("ratio: " + (maxHeight / ((float)terrainTypes / (terrainTypes - 1))));
 
             // Give the terrain a different color, from top to bottom.
             // Snow on the mountains in the 5/5.
