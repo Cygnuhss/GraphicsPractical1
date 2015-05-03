@@ -16,7 +16,6 @@ namespace GraphicsPractical1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        private InputHelper inputHelper;
         private FrameRateCounter frameRateCounter;
 
         private BasicEffect effect;
@@ -29,7 +28,6 @@ namespace GraphicsPractical1
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            this.inputHelper = new InputHelper();
             this.frameRateCounter = new FrameRateCounter(this);
             this.Components.Add(this.frameRateCounter);
         }
@@ -63,7 +61,7 @@ namespace GraphicsPractical1
                 new Vector3(0, 1, 0));
 
             // Load terrain from a heightmap image.
-            Texture2D map = Content.Load<Texture2D>("heightmap");
+            //Texture2D map = Content.Load<Texture2D>("heightmap");
             //this.terrain = new Terrain(new HeightMap(map), 0.2f, this.GraphicsDevice);
 
             // Generate terrain with Perlin noise.

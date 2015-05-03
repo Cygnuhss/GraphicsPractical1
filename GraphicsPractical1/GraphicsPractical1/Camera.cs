@@ -28,13 +28,13 @@ namespace GraphicsPractical1
 
             this.speed = speed;
 
-            this.updateViewMatrix();
+            this.UpdateViewMatrix();
             // Set the projection 45 degrees downwards with near and far clipping planes of 1 and 300.
             this.projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4,
                 aspectRatio, 1.0f, 300.0f);
         }
 
-        private void updateViewMatrix()
+        private void UpdateViewMatrix()
         {
             this.viewMatrix = Matrix.CreateLookAt(this.eye, this.focus, this.up);
         }
@@ -53,14 +53,14 @@ namespace GraphicsPractical1
         {
             get { return this.eye; }
             // Recalculate the view matrix after the eye vector has been set.
-            set { this.eye = value; this.updateViewMatrix(); }
+            set { this.eye = value; this.UpdateViewMatrix(); }
         }
 
         public Vector3 Focus
         {
             get { return this.focus; }
             // Recalculate the view matrix after the focus vector has been set.
-            set { this.focus = value; this.updateViewMatrix(); }
+            set { this.focus = value; this.UpdateViewMatrix(); }
         }
 
         public float Speed

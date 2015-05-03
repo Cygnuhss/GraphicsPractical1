@@ -27,14 +27,14 @@ namespace GraphicsPractical1
             this.width = heightMap.Width;
             this.height = heightMap.Height;
 
-            this.minHeight = calculateMinHeight(heightMap);
-            this.maxHeight = calculateMaxHeight(heightMap);
+            this.minHeight = CalculateMinHeight(heightMap);
+            this.maxHeight = CalculateMaxHeight(heightMap);
 
-            this.vertices = this.loadVertices(heightMap, heightScale);
-            this.setupIndices();
-            this.calculateNormals();
+            this.vertices = this.LoadVertices(heightMap, heightScale);
+            this.SetupIndices();
+            this.CalculateNormals();
 
-            this.copyToBuffers(device);
+            this.CopyToBuffers(device);
         }
 
         // This constructor is used when the heightmap will be generated on the go.
@@ -45,7 +45,7 @@ namespace GraphicsPractical1
 
             float[][] tempMap = PerlinNoise.GeneratePerlinNoise(width, height, octaveCount);
             // Convert from 0-1 float values to 0-255 byte greyscale values.
-            byte[][] byteMap = PerlinNoise.MapToGrey(tempMap);
+            byte[][] byteMap = PerlinNoise.MapToGray(tempMap);
 
             // Convert from jagged array to 2D array.
             byte[,] byteMap2D = new byte[byteMap.Length, byteMap.Max(x => x.Length)];
@@ -60,17 +60,17 @@ namespace GraphicsPractical1
             // Create a heightmap from the byte data.
             HeightMap heightMap = new HeightMap(byteMap2D);
 
-            this.minHeight = calculateMinHeight(heightMap);
-            this.maxHeight = calculateMaxHeight(heightMap);
+            this.minHeight = CalculateMinHeight(heightMap);
+            this.maxHeight = CalculateMaxHeight(heightMap);
 
-            this.vertices = this.loadVertices(heightMap, heightScale);
-            this.setupIndices();
-            this.calculateNormals();
+            this.vertices = this.LoadVertices(heightMap, heightScale);
+            this.SetupIndices();
+            this.CalculateNormals();
 
-            this.copyToBuffers(device);
+            this.CopyToBuffers(device);
         }
 
-        private VertexPositionColorNormal[] loadVertices(HeightMap heightMap, float heightScale)
+        private VertexPositionColorNormal[] LoadVertices(HeightMap heightMap, float heightScale)
         {
             VertexPositionColorNormal[] vertices = new VertexPositionColorNormal[this.width * this.height];
 
@@ -80,13 +80,13 @@ namespace GraphicsPractical1
                     int v = x + y * this.width;
                     float h = heightMap[x, y] * heightScale;
                     vertices[v].Position = new Vector3(x, h, -y);
-                    vertices[v].Color = this.calculateTerrainColor(h, heightScale);
+                    vertices[v].Color = this.CalculateTerrainColor(h, heightScale);
                 }
             
             return vertices;
         }
 
-        private int calculateMinHeight(HeightMap heightMap)
+        private int CalculateMinHeight(HeightMap heightMap)
         {
             // Begin with the highest height possible.
             int minHeight = 255;
@@ -103,7 +103,7 @@ namespace GraphicsPractical1
             return minHeight;
         }
 
-        private int calculateMaxHeight(HeightMap heightMap)
+        private int CalculateMaxHeight(HeightMap heightMap)
         {
             // Begin with the lowest height possible.
             int maxHeight = 0;
@@ -120,7 +120,7 @@ namespace GraphicsPractical1
             return maxHeight;
         }
 
-        private Color calculateTerrainColor(float oldHeight, float heightScale)
+        private Color CalculateTerrainColor(float oldHeight, float heightScale)
         {
             Color color;
             // The maximum height is rescaled to 255.
@@ -164,7 +164,7 @@ namespace GraphicsPractical1
             return converted;
         }
 
-        private void setupIndices()
+        private void SetupIndices()
         {
             this.indices = new short[(this.width - 1) * (this.height - 1) * 6];
             
@@ -187,7 +187,7 @@ namespace GraphicsPractical1
                 }
         }
 
-        private void calculateNormals()
+        private void CalculateNormals()
         {
             for (int i = 0; i < this.indices.Length / 3; i++)
             {
@@ -209,7 +209,7 @@ namespace GraphicsPractical1
                 this.vertices[i].Normal.Normalize();
         }
 
-        private void copyToBuffers(GraphicsDevice device)
+        private void CopyToBuffers(GraphicsDevice device)
         {
             this.vertexBuffer = new VertexBuffer(device, VertexPositionColorNormal.VertexDeclaration,
                 this.vertices.Length, BufferUsage.WriteOnly);

@@ -22,7 +22,7 @@ namespace GraphicsPractical1
             this.width = heightMap.Width;
             this.height = heightMap.Height;
 
-            this.loadHeightData(heightMap);
+            this.LoadHeightData(heightMap);
         }
 
         public HeightMap(byte[,] heightMap)
@@ -33,7 +33,7 @@ namespace GraphicsPractical1
             this.heightData = heightMap;
         }
 
-        private void loadHeightData(Texture2D heightMap)
+        private void LoadHeightData(Texture2D heightMap)
         {
             this.heightData = new byte[this.width, this.height];
 
@@ -42,7 +42,7 @@ namespace GraphicsPractical1
 
             for (int x = 0; x < this.width; x++)
                 for (int y = 0; y < this.height; y++)
-                    // The red value is used arbitrarily. In greyscale, it is equal to the blue and green values.
+                    // The red value is used arbitrarily. In grayscale, it is equal to the blue and green values.
                     this.heightData[x, y] = colorData[x + y * this.width].R;
         }
 
