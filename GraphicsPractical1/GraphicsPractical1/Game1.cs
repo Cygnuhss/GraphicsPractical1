@@ -88,28 +88,18 @@ namespace GraphicsPractical1
 
             this.Window.Title = "Graphics Tutorial | FPS: " + this.frameRateCounter.FrameRate;
 
-            float deltaAngleY = 0;
-            float deltaAngleX = 0;
+            float deltaAngle = 0;
             KeyboardState kbState = Keyboard.GetState();
 
             // Use the Left and Right arrow keys to rotate the camera in the Y-axis.
             if (kbState.IsKeyDown(Keys.Left))
-                deltaAngleY += -3 * timeStep;
+                deltaAngle += -3 * timeStep;
             if (kbState.IsKeyDown(Keys.Right))
-                deltaAngleY += 3 * timeStep;
-            // Use the Up and Down arrow keys to rotate the camera in the X-axis.
-            if (kbState.IsKeyDown(Keys.Up))
-                deltaAngleX += -3 * timeStep;
-            if (kbState.IsKeyDown(Keys.Down))
-                deltaAngleX += 3 * timeStep;
+                deltaAngle += 3 * timeStep;
 
-            if (deltaAngleY != 0)
+            if (deltaAngle != 0)
             {
-                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngleY));
-            }
-            if (deltaAngleX != 0)
-            {
-                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationX(deltaAngleX));
+                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
             }
             
             base.Update(gameTime);
