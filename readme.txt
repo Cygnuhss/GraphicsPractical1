@@ -1,13 +1,15 @@
 Graphics Practical 1
 06-05-2015
 
----
+Yoni Groosman - 4101421
 Jelmer van Nuss - 4058925
 
 
 Bonus assignments:
 
+-------------------------------------
 --- Terrain color based on height ---
+-------------------------------------
 The terrain is split in 5 categories. Each has a range of 1/5 of the height.
 - Water (blue) is in the lower 1/5.
 - Grass (green) is in the 2/5.
@@ -22,9 +24,11 @@ Terrain types can be added or removed, while the spread will still be even.
 With k terrain types, every type will color 1/k part.
 
 Methods involved:	(in the Terrain class)
-calculateTerrainColor, calculateMinHeight, calculateMaxHeight, convertToHeightRange
+CalculateTerrainColor, CalculateMinHeight, CalculateMaxHeight, ConvertToHeightRange
 
+--------------------------------------------
 --- Terrain generation with Perlin noise ---
+--------------------------------------------
 The height of the terrain is based on random values between 0 and 255.
 0 being lowest and 255 being highest.
 These values are generated with Perlin noise.
